@@ -2,6 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import TouchButton from './TouchButton';
 import LongPress from './LongPress';
 
+const likeButtonStyle = {
+  border : '1px solid gray',
+  borderRadius : '5px',
+  background : 'white'
+};
+
 const App = () => {
   const [ likeType, setLikeType ] = useState(null);
   const [ isShowBehavior, setIsShowBehavior ] = useState(false);
@@ -30,7 +36,6 @@ const App = () => {
 
   const onClickSmile = e => {
     console.log('[onClickSmile]');
-    // e.preventDefault();
     setLikeType('great');
   }
 
@@ -46,7 +51,6 @@ const App = () => {
   }
 
   const handleMouseEnter = () => {
-      console.log('hover timer ended.');
       setIsShowBehavior(true);
   }
 
@@ -54,13 +58,11 @@ const App = () => {
     console.log('[onMouseEnter]');
     const hoverTimer = setTimeout(handleMouseEnter, 1500);
     setHoverTimer(hoverTimer);
-    console.log('hover timer : ', hoverTimer);
   }
 
   const onMouseLeave = e => {
     console.log('[onMouseLeave]');
     window.clearTimeout(hoverTimer);
-    console.log('hover timer : ', hoverTimer);
   };
 
   const onLongPress = e => {
@@ -75,6 +77,7 @@ const App = () => {
   const handleLikePost = likeType => {
     console.log("[handleLikePost]");
     setLikeType(likeType);
+    setIsShowBehavior(false);
   };
 
   return (
@@ -100,10 +103,10 @@ const App = () => {
         {isShowBehavior && (
           <div className="behavior-like" ref={behaviorLikeRef}>
             <TouchButton onClick={onClickClose} />
-            <div>
-              <button onClick={() => handleLikePost('great')}>like1</button>
-              <button onClick={() => handleLikePost('sad')}>like2</button>
-              <button onClick={() => handleLikePost('happy')}>like3</button>
+            <div className="like-button-list">
+              <button style={likeButtonStyle} onClick={() => handleLikePost('great')}>like1</button>
+              <button style={likeButtonStyle} onClick={() => handleLikePost('sad')}>like2</button>
+              <button style={likeButtonStyle} onClick={() => handleLikePost('happy')}>like3</button>
             </div>
           </div>
         )}

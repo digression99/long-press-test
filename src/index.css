@@ -49,3 +49,8 @@ code {
   position : absolute;
   top : 0;
 }
+
+.like-button-list {
+  display : flex;
+
+}

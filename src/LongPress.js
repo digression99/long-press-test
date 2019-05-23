@@ -36,7 +36,7 @@ export default ({ children, onLongPress, onPress, time, onTouchEnd : handleTouch
       onPress();
     }
 
-    if (onTouchEnd) {
+    if (handleTouchEnd) {
       handleTouchEnd(e);
     }
   };
