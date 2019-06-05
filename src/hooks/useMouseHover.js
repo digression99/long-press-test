@@ -3,14 +3,15 @@ import useEventListener from './useEventListener';
 
 export default ({ callback, element, time }) => {
   const [ timer, setTimer ] = useState(null);
-  const savedCallback = useRef();
 
   const handleMouseEnter = useCallback(e => {
     console.log('mouse enter!');
+
     const timeoutTimer = setTimeout(() => {
       console.log('timer ended');
       callback && callback();
     }, time);
+
     setTimer(timeoutTimer);
   }, [callback, element]);
 

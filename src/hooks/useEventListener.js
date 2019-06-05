@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 
-export default (eventName, handler, element = global) => {
+export default (eventName, handler, element) => {
   const savedHandler = useRef();
   
   useEffect(() => {
@@ -9,17 +9,16 @@ export default (eventName, handler, element = global) => {
 
   useEffect(
     () => {
-      const isSupported = element && element.addEventListener;
+      const isSupported = element.current && element.current.addEventListener;
       if (!isSupported) return;
 
-      console.log('in use effect, element : ', element);
       const eventListener = event => savedHandler.current(event);
-      element.addEventListener(eventName, eventListener);
+      element.current.addEventListener(eventName, eventListener);
 
       return () => {
-        element.removeEventListener(eventName, eventListener);
+        element.current.removeEventListener(eventName, eventListener);
       }
     },
-    [eventName, element]
+    [eventName, element.current]
   );
 }
